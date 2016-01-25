@@ -17,13 +17,13 @@ class Pokemon{
         _name = name
         _pokdedexId = pokdexId
     }
-    var name:String{
+    var names:String{
         get{
             return _name
             
         }
     }
-    var pokdedexId:Int{
+    var pokdedexIds:Int{
         get{
             return _pokdedexId
         }
