@@ -35,8 +35,42 @@ class DetailedVC: UIViewController {
     var pokes : Pokemon!
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = pokes.names
-
+        nameLabel.text = pokes.names.capitalizedString
+      let img  = UIImage(named: "\(pokes.pokdedexIds)")
+        mainImage.image = img
+        currentEvo.image = img
+        
+        pokes.downloadPokemonDetails { () -> () in
+           self.updateUI()
+        }
+    }
+    func updateUI(){
+        mainDescriptions.text = pokes.description
+        type.text = pokes.type
+        defence.text = pokes.defence
+        height.text = pokes.height
+        weight.text = pokes.weight
+        attack.text = pokes.attack
+        pokedexId.text = "\(pokes.pokdedexIds)"
+        
+        if pokes.nextEvolutionId == ""{
+            nextEvolution.text = "No Evolutions"
+            futureEvo.hidden = true
+        }
+        else{
+            futureEvo.hidden = false
+            futureEvo.image = UIImage(named: "\(pokes.nextEvolutionId)")
+           
+            var str = "Next Evolution: \(pokes.nextEvotext)"
+            if pokes.nextEvoLevel != ""{
+                str += "-LVL \(pokes.nextEvoLevel)"
+                nextEvolution.text = str
+            }
+            
+        }
+        
+        
+        
         
     }
 

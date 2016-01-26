@@ -73,9 +73,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         if let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PokeCell", forIndexPath: indexPath) as? PokeCell{
            
             let poke :Pokemon!
+            
             if inSearchMode{
                 poke = filteredPokemon[indexPath.row]
             }else{
+                
                 poke = pokemon[indexPath.row]
                 }
             cell.configureCell(poke)
@@ -86,14 +88,19 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }
     }
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
         let poke :Pokemon!
         if inSearchMode{
             poke = filteredPokemon[indexPath.row]
         }else{
             poke = pokemon[indexPath.row]
+            print(indexPath.row)
         }
-       performSegueWithIdentifier("DetailedVC", sender: poke)
-        
+        performSegueWithIdentifier("DetailedVC", sender: poke)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "DetailedVC"{
